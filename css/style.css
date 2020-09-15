@@ -1,0 +1,28 @@
+#displayArea {
+    width: 100%;
+    height: 2.5rem;
+    text-align: right;
+}
+
+.btn{
+    width: 100%;
+    padding: .375rem 1.26rem;
+}
+.smallBtn{
+    padding: .375rem 1.34rem;
+}
+.smallestBtn{
+    padding: .375rem 1.5rem;
+}
+
+.bigBtn{
+    padding:.375rem 3.1rem;
+}
+
+#acBtn{
+    padding:.375rem 2.2rem;
+}
+.btn:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}

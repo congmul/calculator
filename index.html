@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI calculator</title>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-xs-6 bg-secondary p-4 pl-5 pr-5 m-5">
+                <div class = "row">
+                    <div class = "bg-white p-2" id="displayArea">0
+                    </div>
+                </div>
+                <div class = "row mt-2 btnRow">
+                    <div class = "col-xs-4 mr-2">
+                        <button class = "bg-dark text-white btn pl-2 pr-2" id="personalInformation">JH</button>
+                    </div>
+                    <div class = "col-xs-4 mr-2">
+                        <button class = "bg-info text-white btn ml-3" id="acBtn">AC</button>
+                    </div>
+                    <div class = "col-xs-4">
+                        <button class = "bg-info text-white btn ml-3 pl-3 pr-2 btn-operator">=</button>
+                    </div>
+                </div> 
+                <div class = "row mt-2 btnRow">    
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn smallBtn btn-numbers">1</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">2</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">3</button>
+                    </div>
+                    <div class = "col-xs-3">
+                        <button class = "bg-info text-white btn btn-operator">+</button>
+                    </div>
+                </div>
+                <div class = "row mt-2 btnRow">
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">4</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">5</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">6</button>
+                    </div>
+                    <div class = "col-xs-3">
+                        <button class = "bg-info text-white btn btn-operator">-</button>
+                    </div>
+                </div>
+                <div class = "row mt-2 btnRow">
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">7</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">8</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn btn-numbers">9</button>
+                    </div>
+                    <div class = "col-xs-3">
+                        <button class = "bg-info text-white btn btn-operator">x</button>
+                    </div>
+                </div>
+                <div class = "row mt-2 btnRow">
+                    <div class = "col-xs-6 mr-2">
+                        <button class = "bg-dark text-white btn bigBtn btn-numbers">0</button>
+                    </div>
+                    <div class = "col-xs-3 mr-2">
+                        <button class = "bg-dark text-white btn smallestBtn" id="decimal">.</button>
+                    </div>
+                    <div class = "col-xs-3">
+                        <button class = "bg-info text-white btn btn-operator">/</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        var personalInformation = "By Jehyun Jung";
+        
+        // const for Id Values
+        const personal = document.getElementById("personalInformation");
+        const decimal = document.getElementById("decimal");
+        const acBtn = document.getElementById("acBtn");
+        const display_numbers = document.getElementById("display_numbers");
+
+        // Numbers and Operators
+        // getElementsClassName returns Array!! - Amount of buttons that have the ClassName
+        const numbers = document.getElementsByClassName("btn-numbers");
+        const operators = document.getElementsByClassName("btn-operator");
+        
+        //addEventListner
+        personal.addEventListener("click", myFunction);
+        decimal.addEventListener("click", myFunction);
+        for (var i = 0; i < numbers.length; i++) {
+            numbers[i].addEventListener('click', updateDisplayVal, false);
+        }
+
+        for (var i = 0; i < operators.length; i++) {
+            operators[i].addEventListener('click', operator, false);
+        }
+
+
+        // Functions
+        var displayVal = 0;
+        var pandingVal = 0;
+        var result = 0;
+        var valueArray = [];
+        
+        // Updating the display field
+        function updateDisplayVal(e) {
+            var btnText = e.target.innerText;
+            if(displayVal === 0) { 
+                displayVal = ""; 
+            }
+            // Append the content of the button we clicked to our displayVal variable and display it
+            displayVal += btnText; 
+            displayArea.innerText = displayVal;
+            console.log(displayVal);
+        }   
+
+        function operator(e){
+            var opText = e.target.innerText;
+            console.log(opText);
+            switch(opText){
+                case '+':
+                pandingVal = displayVal;
+                valueArray.push(pandingVal);
+                valueArray.push(opText);
+                displayVal = 0;
+                displayArea.innerText = displayVal;
+                break;
+
+                case '-':
+                pandingVal = displayVal;
+                valueArray.push(pandingVal);
+                valueArray.push(opText);
+                displayVal = 0;
+                displayArea.innerText = displayVal;
+                break;
+
+                case 'x':
+                pandingVal = displayVal;
+                valueArray.push(pandingVal);
+                valueArray.push('*');
+                displayVal = 0;
+                displayArea.innerText = displayVal;
+                break;
+
+                case '/':
+                pandingVal = displayVal;
+                valueArray.push(pandingVal);
+                valueArray.push(opText);
+                displayVal = 0;
+                displayArea.innerText = displayVal;
+                break;
+
+                case '=':
+                valueArray.push(displayVal);
+                result = eval(valueArray.join(" "));
+                valueArray = [];
+                displayVal = result;
+                displayArea.innerText = result;
+                console.log(result);
+                break;
+            }
+        }
+        
+        // On clicking the clear button, all values and the display are being reset 
+        acBtn.addEventListener("click", clear);
+        function clear() {
+        displayVal = 0;
+        pendingVal = undefined;
+        // evalStringArray = [];
+        displayArea.innerHTML = displayVal;
+        }
+
+         // Not allowing two decimal points in input
+        decimal.onclick = () => { 
+            if(!displayVal.includes(".")) {
+                displayVal += ".";
+            }
+            displayArea.innerText = displayVal;
+        }
+            
+        function myFunction(){
+            document.getElementById("displayArea").innerHTML =  personalInformation;
+        }
+        
+     </script>
+</body>
+</html>
